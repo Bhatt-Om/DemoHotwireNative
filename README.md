@@ -124,7 +124,7 @@
 
 
 - Click Sync Project:
-![Open Gradle File](./Hotwire%20Native%20Presentation/05.PNG)
+![Open Gradle File](./Hotwire%20Native%20Presentation/05.png)
 
 ### 5. Enable Internet Access
 - In AndroidManifest.xml, add the following line above the <application> tag:
