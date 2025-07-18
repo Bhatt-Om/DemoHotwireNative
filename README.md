@@ -176,3 +176,54 @@ class MainActivity : HotwireActivity() {
     )
 }
 ```
+![Open Gradle File](./Hotwire%20Native%20Presentation/06.png)
+
+### 8.Path Configuration
+
+- Insert this following inside the override fun onCreate function:
+
+```kotlin
+    Hotwire.loadPathConfiguration(
+            context = this,
+            location = PathConfiguration.Location(
+                assetFilePath = "json/configuration.json",
+                remoteFileUrl = "https://example.com/configurations/android_v1.json"
+            )
+        )
+```
+
+### 9.Create The json/configuration.json file:
+
+- please follow the following steps to create the configuration.json file:
+
+![Open Gradle File](./Hotwire%20Native%20Presentation/07.png)
+
+- after this inside the configuration.json add this following code:
+
+```kotlin
+{
+  "settings": {},
+  "rules": [
+    {
+      "patterns": [
+        ".*"
+      ],
+      "properties": {
+        "context": "default",
+        "uri": "hotwire://fragment/web",
+        "pull_to_refresh_enabled": true
+      }
+    },
+    {
+      "patterns": [
+        "/new$"
+      ],
+      "properties": {
+        "context": "modal",
+        "uri": "hotwire://fragment/web/modal/sheet",
+        "pull_to_refresh_enabled": false
+      }
+    }
+  ]
+}
+```
