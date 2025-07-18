@@ -132,10 +132,15 @@
  ```kotlin
   <uses-permission android:name="android.permission.INTERNET"/>
 ```
+- If you are using your localhost server than please insert this following line inside the < application > tag:
+
+```kotlin
+    android:usesCleartextTraffic="true"
+```
 ### 6.Set Up Layout XML
 - Open res/layout/activity_main.xml and replace the file with:
 
-```
+```kotlin
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.fragment.app.FragmentContainerView
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -148,7 +153,7 @@
 ```
 ### 7.Update MainActivity.kt
 - Replace the contents of MainActivity.kt with the following:
-```
+```kotlin
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
