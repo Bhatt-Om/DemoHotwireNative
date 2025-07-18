@@ -78,8 +78,6 @@
 
 ---
 
-## 📱 Native Android Setup
-
 ## 📱 Android Studio Setup
 
 ---
