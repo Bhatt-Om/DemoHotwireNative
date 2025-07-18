@@ -78,4 +78,152 @@
 
 ---
 
-## 📱 Native Android Setup
+## 📱 Android Studio Setup
+
+---
+
+### 1. Create a New Project
+
+- Open **Android Studio** and create a new project using the **"Empty Views Activity"** template.
+
+![Create Project](./Hotwire%20Native%20Presentation/01.PNG)
+
+---
+
+### 2. Name Your Project
+
+- Set your desired project name.
+
+![Set Project Name](./Hotwire%20Native%20Presentation/02.PNG)
+
+---
+
+### 3. Change Folder View
+
+- Switch the folder view to **Android** for a clearer project structure.
+
+![Change to Android View](./Hotwire%20Native%20Presentation/03.PNG)
+
+---
+
+### 4. Add Turbo Native Dependencies
+
+- Open `build.gradle.kts` (Module: app) under **Gradle Scripts**.
+
+![Open Gradle File](./Hotwire%20Native%20Presentation/04.PNG)
+
+- Add the following dependencies:
+
+  ```kotlin
+  dependencies {
+      implementation("dev.hotwire:core:<latest-version>")
+      implementation("dev.hotwire:navigation-fragments:<latest-version>")
+  }
+
+
+- Click Sync Project:
+![Open Gradle File](./Hotwire%20Native%20Presentation/05.png)
+
+### 5. Enable Internet Access
+- In AndroidManifest.xml, add the following line above the <application> tag:
+
+ ```kotlin
+  <uses-permission android:name="android.permission.INTERNET"/>
+```
+- If you are using your localhost server than please insert this following line inside the < application > tag:
+
+```kotlin
+    android:usesCleartextTraffic="true"
+```
+### 6.Set Up Layout XML
+- Open res/layout/activity_main.xml and replace the file with:
+
+```kotlin
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.fragment.app.FragmentContainerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav_host"
+    android:name="dev.hotwire.navigation.navigator.NavigatorHost"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:defaultNavHost="false" />
+```
+### 7.Update MainActivity.kt
+- Replace the contents of MainActivity.kt with the following:
+```kotlin
+import android.os.Bundle
+import android.view.View
+import androidx.activity.enableEdgeToEdge
+import dev.hotwire.navigation.activities.HotwireActivity
+import dev.hotwire.navigation.navigator.NavigatorConfiguration
+import dev.hotwire.navigation.util.applyDefaultImeWindowInsets
+
+class MainActivity : HotwireActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        findViewById<View>(R.id.main_nav_host).applyDefaultImeWindowInsets()
+    }
+
+    override fun navigatorConfigurations() = listOf(
+        NavigatorConfiguration(
+            name = "main",
+            startLocation = "https://hotwire-native-demo.dev",
+            navigatorHostId = R.id.main_nav_host
+        )
+    )
+}
+```
+![Open Gradle File](./Hotwire%20Native%20Presentation/06.png)
+
+### 8.Path Configuration
+
+- Insert this following inside the override fun onCreate function:
+
+```kotlin
+    Hotwire.loadPathConfiguration(
+            context = this,
+            location = PathConfiguration.Location(
+                assetFilePath = "json/configuration.json",
+                remoteFileUrl = "https://example.com/configurations/android_v1.json"
+            )
+        )
+```
+
+### 9.Create The json/configuration.json file:
+
+- please follow the following steps to create the configuration.json file:
+
+![Open Gradle File](./Hotwire%20Native%20Presentation/07.png)
+
+- after this inside the configuration.json add this following code:
+
+```kotlin
+{
+  "settings": {},
+  "rules": [
+    {
+      "patterns": [
+        ".*"
+      ],
+      "properties": {
+        "context": "default",
+        "uri": "hotwire://fragment/web",
+        "pull_to_refresh_enabled": true
+      }
+    },
+    {
+      "patterns": [
+        "/new$"
+      ],
+      "properties": {
+        "context": "modal",
+        "uri": "hotwire://fragment/web/modal/sheet",
+        "pull_to_refresh_enabled": false
+      }
+    }
+  ]
+}
+```
