@@ -176,7 +176,7 @@ class MainActivity : HotwireActivity() {
     )
 }
 ```
-![Open Gradle File](./Hotwire%20Native%20Presentation/06.png)
+![Open Gradle File](./Hotwire%20Native%20Presentation/06.PNG)
 
 ### 8.Path Configuration
 
@@ -196,7 +196,7 @@ class MainActivity : HotwireActivity() {
 
 - please follow the following steps to create the configuration.json file:
 
-![Open Gradle File](./Hotwire%20Native%20Presentation/07.png)
+![Open Gradle File](./Hotwire%20Native%20Presentation/07.PNG)
 
 - after this inside the configuration.json add this following code:
 
